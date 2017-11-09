@@ -10,7 +10,7 @@ predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat") #Or se
 clf = SVC(kernel='linear', probability=True, tol=1e-3)#, verbose = True) #Set the classifier as a support vector machines with polynomial kernel
 
 def get_files(emotion): #Define function to get file list, randomly shuffle it and split 80/20
-    files = glob.glob("dataset\\%s\\*" %emotion)
+    files = glob.glob("dataset/%s/*" %emotion) # path using '\' for linux, '//' for windows
     random.shuffle(files)
     training = files[:int(len(files)*0.8)] #get first 80% of file list
     prediction = files[-int(len(files)*0.2):] #get last 20% of file list
@@ -61,10 +61,14 @@ def make_sets():
     training_labels = []
     prediction_data = []
     prediction_labels = []
+
+    #print("debug1")
     for emotion in emotions:
+        #print("debug2")
         training, prediction = get_files(emotion)
         #Append data to training and prediction list, and generate labels 0-7
         for item in training:
+            #print("debug3")
             print (item)
             image = cv2.imread(item) #open image
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) #convert to grayscale
@@ -79,6 +83,7 @@ def make_sets():
                 #print(emotion)
                 #print(emotions.index(emotion))
         for item in prediction:
+            #print("debug4")
             image = cv2.imread(item)
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             clahe_image = clahe.apply(gray)
@@ -96,10 +101,13 @@ for i in range(0,10):
     print("Making sets %s" %i) #Make sets by random sampling 80/20%
     training_data, training_labels, prediction_data, prediction_labels = make_sets()
     
+    #print(training_data)
+    #print(training_labels)
+
     npar_train = np.array(training_data) #Turn the training set into a numpy array for the classifier
     npar_trainlabs = np.array(training_labels)
     print("training SVM linear %s" %i) #train SVM
-    clf.fit(npar_train, training_labels)
+    clf.fit(npar_train, npar_trainlabs) # use np.array
     #print(npar_train)
     print("getting accuracies %s" %i) #Use score() function to get accuracy
     npar_pred = np.array(prediction_data)

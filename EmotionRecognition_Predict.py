@@ -92,7 +92,7 @@ def make_sets():
     return training_data, training_labels, prediction_data, prediction_labels   
 
 
-clf = joblib.load('filename2.pkl') 
+clf = joblib.load('filename2.pk1') # use filename2.pk1 
 image = cv2.imread(sys.argv[1]) #open image
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) #convert to grayscale
 clahe_image = clahe.apply(gray)

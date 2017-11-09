@@ -82,7 +82,7 @@ def get_landmarks(image):
     
     
 
-clf = joblib.load('filename.pkl') #filename2.pk1
+clf = joblib.load('filename2.pk1') #filename2.pk1
 
 while True:
     image = cv2.imread("anger_Image.jpg") #open image
