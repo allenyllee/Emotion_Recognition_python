@@ -1,15 +1,17 @@
 #!/bin/bash
 
 # download fetch_gdrive_file.sh script
+# wget/curl large file from google drive - Stack Overflow 
+# https://stackoverflow.com/questions/25010369/wget-curl-large-file-from-google-drive
+# 
+# allows you do non-interactively download large public files from gdrive 
+# https://gist.github.com/allenyllee/ac42730e9c756e0aeb9b2f07424b68dd
+
 # How do I get the raw version of a gist from github? - Stack Overflow 
 # https://stackoverflow.com/questions/16589511/how-do-i-get-the-raw-version-of-a-gist-from-github
 # 
 # If you want the last version of a Gist document, just remove the <commit>/ from URL
-# https://gist.githubusercontent.com/VonC/9184693/raw/testNewGist
 #
-# allows you do non-interactively download large public files from gdrive 
-# https://gist.github.com/allenyllee/ac42730e9c756e0aeb9b2f07424b68dd
-# 
 wget https://gist.githubusercontent.com/allenyllee/ac42730e9c756e0aeb9b2f07424b68dd/raw/fetch_gdrive_file.sh -O fetch_gdrive_file.sh
 
 URL=$1
